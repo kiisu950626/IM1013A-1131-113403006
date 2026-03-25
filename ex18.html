@@ -2,57 +2,84 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>Heading Exercise</title>
+    <title>Perfect Heading Exercise</title>
     <style>
+        /* 基礎設定 */
         body {
-            font-family: serif; /* 圖片中使用的是襯線體 *
+            font-family: serif; /* 圖片中使用的是襯線體 */
             padding: 40px;
             background-color: white;
-        }
-
-        /* Heading 1: 文字上方黑線 + 粉紅色文字陰影 */
-        h1 {
-            display: inline-block; /* 讓上劃線只跟隨文字長度 */
-            text-decoration: overline;
-            text-decoration-thickness: 3px; /* 調整上方線條粗細 */
-            font-size: 42px;
-            font-weight: bold;
-            margin-bottom: 40px;
-            /* 圖片中文字後方似乎有粉紅色的重疊感，使用 text-shadow 達成 */
-            text-shadow: 2px 2px 0px pink, 3px 3px 0px rgba(255,192,203,0.5);
             color: black;
         }
 
-        /* Heading 2: 斜體 + 黃色粗邊框 + 黑色細外框 (Outline) */
-        h2 {
-            font-style: italic;
+        /* 統一標題樣式 */
+        h1, h2, h3 {
             font-weight: bold;
-            font-size: 32px;
-            padding: 5px 10px;
-            margin-bottom: 40px;
-            border: 4px solid yellow; /* 黃色粗邊 */
-            outline: 1px solid black; /* 外層的黑色細線 */
-            display: block;
-            width: 95%; /* 模擬圖片中的長度 */
+            margin: 0;
+            padding: 0;
         }
 
-        /* Heading 3: 靠右對齊 + 底線 */
-        h3 {
+        /* --- Heading 1: 文字上方黑線 + 粉紅色文字陰影 --- */
+        .h1-container {
+            margin-bottom: 40px;
+            display: inline-block; /* 讓上劃線只跟隨文字長度 */
+        }
+
+        h1 {
+            text-decoration: overline;
+            text-decoration-thickness: 3px; /* 調整上方線條粗細 */
+            font-size: 42px;
+            /* 模擬圖片中文字下方淡淡的粉紅重疊感 */
+            text-shadow: 2px 2px 0px pink, 3px 3px 0px rgba(255,192,203,0.5);
+        }
+
+        /* --- Heading 2: 最關鍵的巢狀結構 (黃框在外，黑線在內) --- */
+        .h2-outer-box {
+            border: 4px solid yellow; /* 黃色粗框 (在外) */
+            padding: 2px; /* 給黑線留一點空間 */
+            width: 95%; /* 模擬圖片中的長度 */
+            box-sizing: border-box; /* 確保 padding 不會撐大盒子 */
+            margin-bottom: 40px;
+        }
+
+        .h2-inner-box {
+            border: 1px solid black; /* 黑色細線 (在內) */
+            padding: 5px 10px; /* 文字與黑線的間距 */
+        }
+
+        h2 {
+            font-style: italic; /* 斜體 */
+            font-size: 32px;
+        }
+
+        /* --- Heading 3: 靠右對齊 + 底線 --- */
+        .h3-container {
             text-align: right;
+            margin-top: 20px;
+        }
+
+        h3 {
             text-decoration: underline;
             font-size: 24px;
-            font-weight: bold;
-            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
-    <h1>This is heading 1</h1>
+    <div class="h1-container">
+        <h1>This is heading 1</h1>
+    </div>
 
-    <h2>This is heading 2</h2>
+    <div class="h2-outer-box">
+        <div class="h2-inner-box">
+            <h2>This is heading 2</h2>
+        </div>
+    </div>
 
-    <h3>This is heading 3</h3>
+    <div class="h3-container">
+        <h3>This is heading 3</h3>
+    </div>
 
 </body>
+</html>
 </html>
