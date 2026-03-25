@@ -2,40 +2,54 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>Heading 2 Style</title>
+    <title>Web Page Assignment</title>
     <style>
-        /* 將樣式分段撰寫，方便管理 */
-        .heading-box {
-            /* 文字大小與粗細 */
+        body {
+            font-family: serif;
+            padding: 40px;
+        }
+
+        /* 第一部分：Heading 1 */
+        h1 {
+            text-decoration: overline;
+            text-decoration-thickness: 3px;
+            font-size: 42px;
+            text-shadow: 2px 2px 0px pink;
+            margin-bottom: 40px;
+            display: inline-block;
+        }
+
+        /* 第二部分：完全依照你提供的代碼，不做任何調整 */
+        h2 {
             font-size: 50px;
             font-weight: bold;
             font-style: italic;
-            
-            /* 背景與內容間距 */
             background-color: white;
-            padding: 10px 20px;
-            display: inline-block; /* 讓框框隨文字長度調整 */
-            
-            /* 內層黑線：使用 border */
             border: 2px solid black;
-            
-            /* 外層黃框：使用 outline outset */
-            /* outset 會產生一種凸起的立體感 */
             outline: thick outset yellow;
             
-            /* 關鍵：將 outline 往外推，確保黑線在內，黃框在外 */
-            outline-offset: 2px; 
-            
-            /* 讓整體更有排版感 */
-            margin: 40px;
+            /* 基礎排版設定 */
+            margin-bottom: 40px;
+            display: block;
+            width: fit-content;
+            padding: 5px 10px;
+        }
+
+        /* 第三部分：Heading 3 */
+        h3 {
+            text-align: right;
+            text-decoration: underline;
+            font-size: 24px;
         }
     </style>
 </head>
 <body>
 
-    <div class="heading-box">
-        This is heading 2
-    </div>
+    <h1>This is heading 1</h1>
+
+    <h2>This is heading 2</h2>
+
+    <h3>This is heading 3</h3>
 
 </body>
 </html>
