@@ -19,8 +19,9 @@
             display: inline-block;
         }
 
-        /* 第二部分：完全依照你提供的代碼，不做任何調整 */
+        /* 第二部分：依照你的代碼，並將寬度調長 */
         h2 {
+            /* 你提供的原始 7 行樣式 */
             font-size: 50px;
             font-weight: bold;
             font-style: italic;
@@ -28,10 +29,13 @@
             border: 2px solid black;
             outline: thick outset yellow;
             
-            /* 基礎排版設定 */
-            margin-bottom: 40px;
+            /* 調整這裡讓它變長 */
+            width: 95%; 
             display: block;
-            width: fit-content;
+            box-sizing: border-box; /* 確保邊框不會超出螢幕 */
+            
+            /* 其他排版 */
+            margin-bottom: 40px;
             padding: 5px 10px;
         }
 
