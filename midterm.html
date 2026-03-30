@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDG 13 氣候行動</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #F6FBF8;
+  color: #163126;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 40px;
+  background: #2F8F5B;
+  color: white;
+}
+
+nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #e8f5e9, #e3f2fd);
+}
+
+.hero-container {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.hero-text {
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+}
+
+.hero-text h1 {
+  font-size: 48px;
+  margin: 0;
+}
+
+.hero-text button {
+  padding: 12px 24px;
+  border-radius: 20px;
+  border: none;
+  background: #2F8F5B;
+  color: white;
+  cursor: pointer;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+  animation-delay: 0.5s;
+}
+
+.hero-img img {
+  width: 250px;
+  animation: float 3s ease-in-out infinite;
+}
+
+section {
+  padding: 70px 40px;
+}
+
+.cards {
+  display: flex;
+  gap: 20px;
+}
+
+.card {
+  flex: 1;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: 0.6s;
+}
+
+.card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.problem {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.problem img {
+  width: 50%;
+  border-radius: 15px;
+}
+
+.problem-text {
+  width: 50%;
+}
+
+.solutions {
+  display: flex;
+  gap: 20px;
+  text-align: center;
+}
+
+.solution {
+  flex: 1;
+}
+
+.cta {
+  text-align: center;
+  background: #2F8F5B;
+  color: white;
+  padding: 80px 20px;
+}
+
+.cta button {
+  padding: 12px 24px;
+  border-radius: 20px;
+  border: none;
+  background: white;
+  color: #2F8F5B;
+  cursor: pointer;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #163126;
+  color: white;
+}
+
+@keyframes fadeUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .hero-container { flex-direction: column; text-align: center; }
+  .cards { flex-direction: column; }
+  .problem { flex-direction: column; }
+  .problem img, .problem-text { width: 100%; }
+  .solutions { flex-direction: column; }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div>SDG 13</div>
+  <div>
+    <a href="#">首頁</a>
+    <a href="#">介紹</a>
+    <a href="#">行動</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-container">
+    <div class="hero-text">
+      <h1>一起為地球降溫</h1>
+      <p>聯合國永續發展目標 SDG 13</p>
+      <button>了解更多</button>
+    </div>
+    <div class="hero-img">
+      <img src="https://cdn-icons-png.flaticon.com/512/4144/4144793.png">
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>氣候問題</h2>
+  <div class="cards">
+    <div class="card">全球暖化</div>
+    <div class="card">極端氣候</div>
+    <div class="card">環境破壞</div>
+  </div>
+</section>
+
+<section class="problem">
+  <img src="https://images.unsplash.com/photo-1509395176047-4a66953fd231">
+  <div class="problem-text">
+    <h2>問題現況</h2>
+    <p>氣候變遷造成全球暖化與極端氣候，影響人類與生態。</p>
+  </div>
+</section>
+
+<section>
+  <h2>我們能做什麼</h2>
+  <div class="solutions">
+    <div class="solution">♻️ 回收</div>
+    <div class="solution">💡 節能</div>
+    <div class="solution">🚲 減碳</div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>現在就開始行動！</h2>
+  <button>加入我們</button>
+</section>
+
+<footer>
+  SDG 13 氣候行動網站
+</footer>
+
+<script>
+const cards = document.querySelectorAll('.card');
+
+window.addEventListener('scroll', () => {
+  cards.forEach(card => {
+    const top = card.getBoundingClientRect().top;
+    if (top < window.innerHeight - 50) {
+      card.classList.add('show');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
