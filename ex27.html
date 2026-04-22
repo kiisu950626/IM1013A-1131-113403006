@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Layout</title>
+
+<style>
+body {
+    background: #1e6f95;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* 外框 */
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+}
+
+/* 上面大區塊 */
+.header {
+    background: #8cc63f;
+    height: 100px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+/* 中間區塊 */
+.middle {
+    display: flex;
+    flex-direction: column; /* 預設：直的 */
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.box {
+    background: #0f7c82;
+    height: 60px;
+    border-radius: 10px;
+}
+
+/* 底部淡色區塊 */
+.footer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.footer div {
+    background: #eee;
+    height: 50px;
+    border-radius: 5px;
+}
+
+/* ⭐ 重點：Media Query */
+@media (min-width: 480px) {
+    .middle {
+        flex-direction: row; /* 變橫排 */
+    }
+
+    .box {
+        flex: 1; /* 三等分 */
+        height: 100px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="header"></div>
+
+    <div class="middle">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+
+    <div class="footer">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
+</body>
+</html>
