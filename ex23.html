@@ -1,14 +1,46 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Button</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<title>Try This Button</title>
+
+<style>
+body {
+  padding: 50px;
+  font-family: Roboto, Arial, sans-serif;
+}
+
+/* Try this 按鈕 */
+.try-btn {
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 8px;
+  border: 1px solid #2f2f2f;
+  background-color: #ffffff;
+  color: #2f2f2f;
+  font-size: 13px;
+  font-family: Roboto, Arial, sans-serif;
+  cursor: pointer;
+}
+
+.try-btn:hover {
+  background-color: #eeeeee;
+}
+</style>
 </head>
+
 <body>
-  <div class="container">
-    <button class="viewmore-btn">查看更多</button>
-  </div>
+
+<button class="try-btn" onclick="showInfo()">查看資訊</button>
+
+<p id="info"></p>
+
+<script>
+function showInfo() {
+  document.getElementById("info").innerText =
+    "這是按下 Try this 按鈕後顯示的詳細資訊。";
+}
+</script>
+
 </body>
 </html>
