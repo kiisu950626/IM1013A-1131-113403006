@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Mouse Event</title>
+</head>
+
+<body>
+
+<h1 id="text">Hello</h1>
+
+<button 
+    onmouseover="changeColor()" 
+    onclick="changeText()">
+    Button
+</button>
+
+<script>
+function changeColor() {
+    document.getElementById("text").style.color = "pink";
+}
+
+function changeText() {
+    document.getElementById("text").innerHTML = "Mouse Click";
+}
+</script>
+
+</body>
+</html>
