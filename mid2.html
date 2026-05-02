@@ -100,68 +100,178 @@
 .option-card.active .option-text {
     border-color: #000;
 }
-/* 🎬 場景 */
-.scene {
+/* ===== 高質感故事動畫區 ===== */
+.story-box {
+    background: #EADCC7;
+    margin-top: 24px;
+    padding: 28px;
+    border-radius: 24px;
+    font-size: 22px;
+    line-height: 1.7;
+    color: #111827;
+}
+
+.story-visual {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 22px;
+}
+
+.avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffffff, #f2d8c9);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     position: relative;
-    height: 120px;
-    margin-bottom: 20px;
 }
 
-/* 👧 同學 */
-.student {
+.avatar::before {
+    content: "";
     position: absolute;
-    font-size: 50px;
-    left: 10%;
-    top: 30px;
-    animation: fadeIn 1s ease;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #ef4444;
+    right: -6px;
+    top: -6px;
+    animation: softPulse 1.8s infinite;
 }
 
-/* 🍱 便當（會消失） */
-.lunch {
-    position: absolute;
-    font-size: 40px;
-    left: 25%;
-    top: 40px;
-    animation: lunchDisappear 2s forwards;
+.story-note {
+    background: rgba(255,255,255,0.75);
+    border-left: 5px solid #ef4444;
+    padding: 12px 16px;
+    border-radius: 14px;
+    font-size: 18px;
+    color: #374151;
+    animation: slideIn 0.8s ease forwards;
 }
 
-/* 😞 情緒（慢慢出現） */
-.emotion {
-    position: absolute;
+@keyframes softPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scale(1.25);
+        opacity: 0.25;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ===== 選項區可讀性修正 ===== */
+.option-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.option-card:hover {
+    transform: translateY(-4px);
+}
+
+.option-circle {
+    min-width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    background: #111827;
+    color: white;
     font-size: 30px;
-    left: 10%;
-    top: 0;
-    opacity: 0;
-    animation: emotionShow 2s 1.5s forwards;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.25);
 }
 
-/* 💭 思考泡泡 */
-.thought {
-    position: absolute;
-    font-size: 30px;
-    right: 10%;
-    top: 10px;
-    opacity: 0;
-    animation: thoughtShow 2s 3s forwards;
+.option-text {
+    border: 2px dashed #d1d5db;
+    padding: 16px 18px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.96);
+    color: #111827;
+    font-size: 18px;
+    line-height: 1.35;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
 
-/* 動畫 */
-@keyframes lunchDisappear {
-    0% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(-20px); }
+.option-card.active .option-circle {
+    background: #facc15;
+    color: #111827;
 }
 
-@keyframes emotionShow {
-    to { opacity: 1; transform: translateY(-5px); }
+.option-card.active .option-text {
+    border-color: #facc15;
+    background: #ffffff;
+}
+.story-highlight {
+    margin: 16px 0;
+    padding: 12px 16px;
+    border-left: 5px solid #facc15;
+    background: rgba(255,255,255,0.6);
+    border-radius: 10px;
+    font-size: 18px;
+}
+.option-card:hover .option-text {
+    border-color: #111827;
 }
 
-@keyframes thoughtShow {
-    to { opacity: 1; transform: scale(1.1); }
+.option-card:active {
+    transform: scale(0.98);
+}
+.result-card {
+    padding: 16px 20px;
+    border-radius: 14px;
+    font-size: 18px;
+    font-weight: 600;
+    animation: fadeIn 0.4s ease;
+}
+
+.correct {
+    background: #dcfce7;
+    color: #166534;
+    border-left: 6px solid #22c55e;
+}
+
+.wrong {
+    background: #fee2e2;
+    color: #991b1b;
+    border-left: 6px solid #ef4444;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { opacity: 0; transform: translateY(10px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+#modal {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#modal.show {
+    opacity: 1;
+}
+.option-card.active {
+    animation: selectPop 0.2s ease;
+}
+
+@keyframes selectPop {
+    0% { transform: scale(0.95); }
+    100% { transform: scale(1); }
 }
     </style>
 </head>
@@ -314,155 +424,156 @@
          </div>
     </main>
 
-    <!-- 彈出視窗區塊 -->
-    <div id="modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-50">
-        <div class="bg-[#F3E8D5] rounded-3xl max-w-3xl w-full shadow-2xl overflow-y-auto max-h-[90vh]">
+<!-- 彈出視窗區塊 -->
+<div id="modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-50">
+    <div class="bg-[#F3E8D5] rounded-3xl max-w-5xl w-full shadow-2xl overflow-y-auto max-h-[90vh] p-8">
 
-    <!-- 第一畫面 -->
-    <div class="p-8">
-        <div class="flex items-start gap-4">
-            <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-1.png" class="w-16">
-            <h2 class="text-4xl font-bold title-font">No Poverty</h2>
+        <!-- 標題 -->
+        <div class="flex items-center gap-5 mb-8">
+            <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-1.png" class="w-20">
+            <h2 class="text-5xl font-bold title-font">No Poverty</h2>
         </div>
 
-        <div class="bg-[#EADCC7] mt-6 p-6 rounded-2xl text-lg leading-relaxed">
+        <!-- 兩欄排版：左故事，右選項 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
-    <!-- ⭐ 動畫場景放這裡 -->
-    <div class="scene">
-
-        <div class="student">👧</div>
-        <div class="lunch">🍱</div>
-        <div class="emotion">😞</div>
-        <div class="thought">💭</div>
-
-    </div>
-
-    <!-- 原本文字保留 -->
-    <p>
-        You notice that one of your classmates has recently stopped bringing lunch to school.
-    </p>
-
-    <br>
-
-    <p>
-        Over time, you realize that this is not a temporary situation — it may be due to financial difficulties at home.
-    </p>
-
-    <br>
-
-    <p>
-        You begin to think carefully about what the most appropriate and respectful action would be.
-    </p>
-
-</div>
-        </div>
-    </div>
-
-    <!-- 第二畫面（選項） -->
-    <div class="px-8 pb-10">
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-            <!-- A -->
-            <div class="option-card" data-option="A">
-                <div class="option-circle">A</div>
-                <div class="option-text">
-                    Tell the whole class about the situation and suggest raising money together.
-                </div>
-            </div>
-
-            <!-- B -->
-            <div class="option-card" data-option="B">
-                <div class="option-circle">B</div>
-                <div class="option-text">
-                    Decide not to interfere because it is their personal matter.
-                </div>
-            </div>
-
-            <!-- C -->
-            <div class="option-card" data-option="C">
-                <div class="option-circle">C</div>
-                <div class="option-text">
-                    Quietly give them food every day without telling anyone.
-                </div>
-            </div>
-
-            <!-- D -->
-            <div class="option-card" data-option="D">
-                <div class="option-circle">D</div>
-                <div class="option-text">
-                    Talk to them privately and help them find support.
-                </div>
-            </div>
-
-        </div>
-
-        <!-- NEXT 按鈕 -->
-        <div class="flex justify-end mt-8">
-            <button id="nextBtn" class="bg-yellow-400 text-white px-6 py-2 rounded-full font-bold">
-                NEXT →
-            </button>
-        </div>
+            <!-- 左邊：故事 -->
+            <div class="story-box">
+                <div class="story-visual">
+                    <div class="avatar"></div>
+                    <div class="story-note">
+                        A quiet change is noticed during lunch time.
                     </div>
-    </div>
+                </div>
 
+                <p>
+                    You notice that one of your classmates has recently stopped bringing lunch to school.
+                </p>
+<div class="story-highlight">
+    You start to realize this may not be a temporary situation.
 </div>
 
+                <br>
 
-    <script>
+                <p>
+                    Over time, you realize that this is not a temporary situation — it may be due to financial difficulties at home.
+                </p>
+
+                <br>
+
+                <p>
+                    You begin to think carefully about what the most appropriate and respectful action would be.
+                </p>
+            </div>
+
+            <!-- 右邊：選項 -->
+            <div class="space-y-5">
+
+                <div class="option-card" data-option="A">
+                    <div class="option-circle">A</div>
+                    <div class="option-text">
+                        Tell the whole class about the situation and suggest raising money together.
+                    </div>
+                </div>
+
+                <div class="option-card" data-option="B">
+                    <div class="option-circle">B</div>
+                    <div class="option-text">
+                        Decide not to interfere because it is their personal matter.
+                    </div>
+                </div>
+
+                <div class="option-card" data-option="C">
+                    <div class="option-circle">C</div>
+                    <div class="option-text">
+                        Quietly give them food every day without telling anyone.
+                    </div>
+                </div>
+
+                <div class="option-card" data-option="D">
+                    <div class="option-circle">D</div>
+                    <div class="option-text">
+                        Talk to them privately and help them find support.
+                    </div>
+                </div>
+
+                <div class="flex justify-end pt-4">
+                    <button id="nextBtn" class="bg-yellow-400 text-white px-8 py-3 rounded-full font-bold text-xl shadow-lg hover:scale-105 transition">
+
+                        NEXT →
+                    </button>
+                </div>
+<div id="resultBox" class="mt-6"></div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
 document.addEventListener("DOMContentLoaded", () => {
 
     let selectedOption = null;
 
-    // SDG 點擊
     document.querySelectorAll('.sdg-card').forEach(card => {
         card.addEventListener('click', () => {
             const title = card.getAttribute('data-title');
 
             if (title.includes("SDG 1")) {
-    document.getElementById('modal').style.display = 'flex';
+                const modal = document.getElementById('modal');
+                modal.style.display = 'flex';
+                setTimeout(() => modal.classList.add('show'), 10);
 
-    // 重播動畫
-    document.querySelectorAll('.scene div').forEach(el => {
-        el.style.animation = 'none';
-        el.offsetHeight;
-        el.style.animation = '';
-    });
-}
+                selectedOption = null;
+                document.querySelectorAll('.option-card').forEach(c => c.classList.remove('active'));
+                document.getElementById('resultBox').innerHTML = "";
+            }
         });
     });
 
-    // 選項點擊
     document.querySelectorAll('.option-card').forEach(card => {
         card.addEventListener('click', () => {
-
             document.querySelectorAll('.option-card').forEach(c => c.classList.remove('active'));
-
             card.classList.add('active');
             selectedOption = card.dataset.option;
         });
     });
 
-    // NEXT
     document.getElementById('nextBtn').addEventListener('click', () => {
         if (!selectedOption) {
             alert("請先選擇一個選項");
             return;
         }
 
-        alert("你選擇了：" + selectedOption);
+        const resultBox = document.getElementById('resultBox');
+
+        if (selectedOption === "D") {
+            resultBox.innerHTML = `
+                <div class="result-card correct">
+                    ✅ Excellent choice. You respected their dignity and offered appropriate support.
+                </div>
+            `;
+        } else {
+            resultBox.innerHTML = `
+                <div class="result-card wrong">
+                    ⚠️ This action may unintentionally cause discomfort or embarrassment.
+                </div>
+            `;
+        }
     });
 
-    // 點背景關閉
     document.getElementById('modal').addEventListener('click', (e) => {
+        const modal = document.getElementById('modal');
+
         if (e.target.id === 'modal') {
-            document.getElementById('modal').style.display = 'none';
+            modal.classList.remove('show');
+            setTimeout(() => modal.style.display = 'none', 300);
         }
     });
 
 });
+
 </script>
 
-
 </body>
-</html>
+</html>>
