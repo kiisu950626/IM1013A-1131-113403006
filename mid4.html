@@ -112,15 +112,14 @@
            情境故事、角色提示與互動選項區塊樣式
         ========================================================================== */
 
-        .story-box {
-    /* 使用微弱的漸層增加深度 */
-    background: linear-gradient(145deg, #2D3332 0%, #212625 100%);
+      .story-box {
+    /* 使用深色內凹感，與提亮後的背景形成反差 */
+    background: rgba(0, 0, 0, 0.15); 
     padding: 32px;
     border-radius: 24px;
-    /* 提亮邊框，特別是左上角，模擬光線照下來的感覺 */
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-top: 1px solid rgba(197, 179, 150, 0.2);
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    /* 加上微弱的內陰影增加深度 */
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2);
 }
         .avatar {
             width: 64px;
@@ -146,20 +145,20 @@
     font-family: 'Libre Baskerville', serif;
 }
 
-        .option-text {
-    background: rgba(255, 255, 255, 0.04);
-    /* 增加邊框明度，讓輪廓跳出來 */
-    border: 1px solid rgba(197, 179, 150, 0.2); 
-    color: #CDC8BC;
-    backdrop-filter: blur(5px);
-    transition: all 0.3s ease;
+       .option-text {
+    /* 稍微提升透明背景的明度 */
+    background: rgba(255, 255, 255, 0.05);
+    /* 讓邊框更清晰 */
+    border: 1px solid rgba(197, 179, 150, 0.25);
+    color: #E0DDD5; /* 再次提亮文字顏色 */
+    transition: all 0.4s ease;
 }
 
-/* 滑鼠移上去時，讓邊框稍微「發光」 */
+/* 懸停時的發光效果強化 */
 .option-card:hover .option-text {
-    background: rgba(197, 179, 150, 0.08);
+    background: rgba(255, 255, 255, 0.08);
     border-color: rgba(197, 179, 150, 0.6);
-    box-shadow: 0 0 15px rgba(197, 179, 150, 0.1);
+    transform: translateX(5px); /* 輕微的橫向位移更有互動感 */
 }
 
         /* 使用者選取答案後的狀態樣式 */
@@ -181,10 +180,11 @@
 
         .modal-bg {
     /* 變成深色玻璃質感 */
-    background-color: rgba(18, 21, 20, 0.98);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(197, 179, 150, 0.3);
-    box-shadow: 0 0 100px rgba(0, 0, 0, 0.9);
+    background: linear-gradient(135deg, #2A2F2D 0%, #1F2423 100%);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(197, 179, 150, 0.2);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+
 }
 
         .btn-next {
