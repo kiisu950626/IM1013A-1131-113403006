@@ -38,13 +38,10 @@
 
         /* Modal 標題字型設定 */
        .modal-title-font {
-    font-family: 'Libre Baskerville', serif;
-    /* 換成明亮的香檳金漸層 */
-    background: linear-gradient(to bottom, #F0EAD6 0%, #C5B396 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-    letter-spacing: 0.02em;
+    font-family: 'Libre Baskerville', serif; /* 回歸原始字體 */
+    color: #D1CDC0; /* 保持原始色調但稍微提亮，增加質感 */
+    letter-spacing: 0.05em; /* 恢復原始間距 */
+    /* 這裡不設定 font-size，它會自動套用 HTML 標籤裡的 text-5xl */
 }
 
 #storyMain, #storySub {
