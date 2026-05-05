@@ -182,13 +182,13 @@
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-0 border-t border-l border-white/10">
-            <!-- 這裡只列出 SDG 1 作為範例，請自行保留你原本的 17 個卡片 -->
+            <!-- SDG 1 -->
             <div class="sdg-card border-r border-b" data-title="SDG 1: No Poverty">
                 <div class="sdg-image-container flex items-center justify-center w-full h-full">
                     <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-1.png" alt="Goal 1">
                 </div>
             </div>
-            <!-- 其他卡片 ... -->
+            <!-- SDG 2 -->
             <div class="sdg-card border-r border-b" data-title="SDG 2: Zero Hunger">
                 <div class="sdg-image-container flex items-center justify-center w-full h-full">
                     <img src="https://sustainable.thu.edu.tw/wp-content/uploads/2022/09/SDGs-2.png" alt="Goal 2">
@@ -250,58 +250,64 @@
             const resultBox = document.getElementById("resultBox");
             const optionCards = document.querySelectorAll(".option-card");
 
-            // 模式切換
-            navInteraction.onclick = () => {
-                currentMode = 'interaction';
-                navInteraction.className = "nav-item text-xs tracking-[0.2em] uppercase text-[#A3B18A] font-bold border-b border-[#A3B18A] pb-1 cursor-pointer";
-                navIntro.className = "nav-item text-xs tracking-[0.2em] uppercase text-[#A8A394] hover:text-[#D1CDC0] transition-all cursor-pointer";
-            };
+            if (navInteraction && navIntro) {
+                navInteraction.onclick = () => {
+                    currentMode = 'interaction';
+                    navInteraction.className = "nav-item text-xs tracking-[0.2em] uppercase text-[#A3B18A] font-bold border-b border-[#A3B18A] pb-1 cursor-pointer";
+                    navIntro.className = "nav-item text-xs tracking-[0.2em] uppercase text-[#A8A394] hover:text-[#D1CDC0] transition-all cursor-pointer";
+                };
 
-            navIntro.onclick = () => {
-                currentMode = 'intro';
-                navIntro.className = "nav-item text-xs tracking-[0.2em] uppercase text-[#A3B18A] font-bold border-b border-[#A3B18A] pb-1 cursor-pointer";
-                navInteraction.className = "nav-item text-xs tracking-[0.2em] uppercase text-[#A8A394] hover:text-[#D1CDC0] transition-all cursor-pointer";
-            };
+                navIntro.onclick = () => {
+                    currentMode = 'intro';
+                    navIntro.className = "nav-item text-xs tracking-[0.2em] uppercase text-[#A3B18A] font-bold border-b border-[#A3B18A] pb-1 cursor-pointer";
+                    navInteraction.className = "nav-item text-xs tracking-[0.2em] uppercase text-[#A8A394] hover:text-[#D1CDC0] transition-all cursor-pointer";
+                };
+            }
 
-            // 卡片點擊
-            document.querySelectorAll(".sdg-card").forEach(card => {
+            document.querySelectorAll(".sdg-card").forEach((card, index) => {
                 card.onclick = () => {
-                    const title = card.getAttribute("data-title");
+                    const title = (card.getAttribute("data-title") || "").toLowerCase();
+                    
                     if (currentMode === 'interaction') {
-                        if (title.includes("SDG 1")) {
+                        if (title.includes("no poverty") || title.includes("sdg 1") || index === 0) {
                             modal.classList.remove("hidden");
                             modal.style.display = "flex";
                             resetModal();
                         } else {
-                            alert("Coming soon!");
+                            alert("This interaction is under development!");
                         }
                     } else {
-                        alert("Intro Mode: " + title);
+                        alert("Intro Mode: " + card.getAttribute("data-title"));
                     }
                 };
             });
 
-            // 選項點擊
             optionCards.forEach(card => {
                 card.onclick = () => {
                     optionCards.forEach(c => c.classList.remove("active"));
                     card.classList.add("active");
                     selectedOption = card.dataset.option;
+                    resultBox.innerHTML = ""; 
                 };
             });
 
-            // 送出
             document.getElementById("nextBtn").onclick = () => {
                 if (!selectedOption) {
-                    resultBox.innerHTML = "Please select an option.";
+                    resultBox.innerHTML = "<div class='text-red-400'>Please select an option.</div>";
                     return;
                 }
-                resultBox.innerHTML = selectedOption === "D" ? "✅ Excellent!" : "⚠️ Try again.";
+                if (selectedOption === "D") {
+                    resultBox.innerHTML = "<div class='p-4 bg-green-900/30 text-[#A3B18A] border border-[#A3B18A] rounded-lg'>✅ Correct! Privacy is key.</div>";
+                } else {
+                    resultBox.innerHTML = "<div class='p-4 bg-red-900/30 text-red-300 border border-red-900/50 rounded-lg'>⚠️ Consider the student's feelings first.</div>";
+                }
             };
 
-            // 關閉
-            document.getElementById("closeModal").onclick = () => modal.style.display = "none";
-            
+            document.getElementById("closeModal").onclick = () => {
+                modal.style.display = "none";
+                modal.classList.add("hidden");
+            };
+
             function resetModal() {
                 selectedOption = null;
                 optionCards.forEach(c => c.classList.remove("active"));
