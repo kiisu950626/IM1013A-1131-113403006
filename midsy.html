@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <!--
@@ -172,19 +172,24 @@
     backdrop-filter: blur(8px); /* 關鍵：讓兩側透出的底層畫面變模糊 */
 }
 
-/* 彈窗背景遮罩：讓兩側透光 */
+/* 彈窗背景遮罩：讓背景透出來 */
 #modal {
-    background: rgba(31, 36, 35, 0.6); /* 降低透明度，讓背景透出來 */
-    backdrop-filter: blur(4px) brightness(1.2); /* 關鍵：增加亮度與輕微模糊 */
-    transition: all 0.3s ease;
+    /* 使用 rgba 控制透明度，0.4 左右可以清楚看到後方卡片 */
+    background: rgba(15, 18, 17, 0.45); 
+    
+    /* 關鍵：讓兩側透出的底層畫面產生模糊感，更有質感 */
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px); /* 確保 Safari 瀏覽器相容 */
+    
+    transition: all 0.3s ease;
 }
 
-/* 彈窗主體：保持紮實感但邊緣柔和 */
+/* 彈窗主體：微調邊框，讓它在半透明背景中更立體 */
 .modal-bg {
-    background-color: rgba(26, 30, 29, 0.98); 
-    border: 1px solid rgba(163, 177, 138, 0.3);
-    box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
-    position: relative;
+    background-color: rgba(30, 35, 34, 0.98); 
+    border: 1px solid rgba(163, 177, 138, 0.2);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    position: relative;
 }
 
 /* 導覽按鈕選中樣式 */
@@ -215,9 +220,6 @@
             color: #E2E2E2;
             transform: rotate(90deg);
         }
-        #modal.hidden {
-            pointer-events: none; /* ⭐ FIX */
-        }
     </style>
 </head>
 
@@ -388,7 +390,8 @@
          使用者點擊 SDG 1 卡片後顯示。
          內容包含情境敘事、四個選項與送出後的即時回饋。
     ====================================================================== -->
-    <div id="modal" class="fixed inset-0 bg-black/90 hidden items-center justify-center p-4 z-[999]">
+    <!-- 移除 bg-black/90，改由 CSS 控制透明度 -->
+<div id="modal" class="fixed inset-0 hidden items-center justify-center p-4 z-50">
         <div class="modal-bg rounded-3xl max-w-5xl w-full shadow-2xl overflow-y-auto max-h-[95vh] p-8 md:p-12 relative">
 
             <!-- Modal 關閉按鈕 -->
@@ -560,11 +563,10 @@
             
             if (currentMode === 'interaction') {
                 // 情境互動模式：目前僅 SDG 1
-               if (title.includes("SDG 1")) {
-                    modal.classList.remove("hidden");   // ⭐ FIX
-                    modal.classList.add("flex");        // ⭐ FIX
-                    resetModal();
-                } else {
+                if (title.includes("SDG 1")) {
+                    modal.style.display = "flex";
+                    resetModal();
+                } else {
                     alert("Interaction for this goal is coming soon!");
                 }
             } else {
@@ -596,16 +598,8 @@
         }
     });
 
-    closeBtn.addEventListener("click", () => { 
-    modal.classList.add("hidden");      // ⭐ FIX
-    modal.classList.remove("flex");     // ⭐ FIX
-    });
-    modal.addEventListener("click", (e) => { 
-    if (e.target === modal) {
-        modal.classList.add("hidden");  // ⭐ FIX
-        modal.classList.remove("flex"); // ⭐ FIX
-    }
-    });
+    closeBtn.addEventListener("click", () => { modal.style.display = "none"; });
+    window.addEventListener("click", (e) => { if (e.target === modal) modal.style.display = "none"; });
 
     function resetModal() {
         selectedOption = null;
@@ -614,4 +608,4 @@
     }
 });
 </body>
-</html>
+</html> 
