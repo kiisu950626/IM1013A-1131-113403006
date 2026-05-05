@@ -165,11 +165,25 @@
            Modal 用於呈現 SDG 1 的情境式互動題目。
         ====================================================================== */
 
-        .modal-bg {
-            background-color: #1A1E1D;
-            border: 1px solid rgba(197, 179, 150, 0.3);
-        }
+        /* 彈窗背景遮罩：讓背景透出來 */
+#modal {
+    /* 使用 rgba 控制透明度，0.4 左右可以清楚看到後方卡片 */
+    background: rgba(15, 18, 17, 0.45); 
+    
+    /* 關鍵：讓兩側透出的底層畫面產生模糊感，更有質感 */
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px); /* 確保 Safari 瀏覽器相容 */
+    
+    transition: all 0.3s ease;
+}
 
+/* 彈窗主體：微調邊框，讓它在半透明背景中更立體 */
+.modal-bg {
+    background-color: rgba(30, 35, 34, 0.98); 
+    border: 1px solid rgba(163, 177, 138, 0.2);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    position: relative;
+}
         .btn-next {
             background-color: #C5B396;
             color: #1F2423;
@@ -348,7 +362,8 @@
          使用者點擊 SDG 1 卡片後顯示。
          內容包含情境敘事、四個選項與送出後的即時回饋。
     ====================================================================== -->
-    <div id="modal" class="fixed inset-0 bg-black/90 hidden items-center justify-center p-4 z-50">
+    <!-- 移除 bg-black/90，改由 CSS 控制透明度 -->
+<div id="modal" class="fixed inset-0 hidden items-center justify-center p-4 z-50">
         <div class="modal-bg rounded-3xl max-w-5xl w-full shadow-2xl overflow-y-auto max-h-[95vh] p-8 md:p-12 relative">
 
             <!-- Modal 關閉按鈕 -->
